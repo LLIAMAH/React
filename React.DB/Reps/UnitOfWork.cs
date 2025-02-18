@@ -10,13 +10,15 @@ public class UnitOfWork: IUnitOfWork
     
     public IRepProjects RepProjects { get; }
     public IRepTickets RepTickets { get; }
-    
+    public IRepStatuses RepStatuses { get; }
+
     public UnitOfWork(AppDbCtx ctx, ILogger<UnitOfWork> logger)
     {
         this._logger = logger;
         this._ctx = ctx;
         this.RepProjects = new RepProjects(ctx);
         this.RepTickets = new RepTickets(ctx);
+        this.RepStatuses = new RepStatuses(ctx);
     }
 
     public async Task<IResultBool> SaveChangesAsync()

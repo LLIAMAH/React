@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\React.DB\React.DB.csproj" />
+      <ProjectReference Include="..\React.Dto\React.Dto.csproj" />
     </ItemGroup>
 
 </Project>
