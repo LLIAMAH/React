@@ -1,0 +1,6 @@
+﻿.idea/*
+
+/React.WebApi/bin/
+/React.WebApi/obj/
+/React.DB/bin/
+/React.DB/obj/
