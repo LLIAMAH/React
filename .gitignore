@@ -1,8 +1,51 @@
 ﻿.idea/*
 
-/React.WebApi/bin
-/React.WebApi/obj
-/React.DB/bin
-/React.DB/obj
-/React.Dto/bin
-/React.Dto/obj
+**/obj/rider.project.model.nuget.info
+**/obj/rider.project.restore.info
+
+**/bin/
+**/obj/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore Rider logs, caches, and other redundant files
+.idea/
+*.sln.iml
+
+# Ignore package managers output
+node_modules/        # if working with Node.js
+*.npm                # NPM cache files
+yarn.lock            # Yarn lockfile
+
+# Ignore configuration-related secrets
+appsettings.*.json
+app.config
+web.config
+
+# Additional ignored files
+*.log
+*.tmp
+
+# Ignore auto-generated folders for specific frameworks/tools
+wwwroot/
+coverage/
+
+# Ignore DotNet-specific
+*.pidb
+
+# Temporary files
+*.~?
+*.swp
+
+### Custom Entries From Your Project ###
+React.WebApi/bin
+React.WebApi/obj
+React.DB/bin
+React.DB/obj
+React.Dto/bin
+React.Dto/obj
+React.Dto/obj/Debug/net9.0/
