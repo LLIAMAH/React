@@ -1,8 +1,8 @@
 ﻿.idea/*
 
-/React.WebApi/bin/
-/React.WebApi/obj/
-/React.DB/bin/
-/React.DB/obj/
-/React.Dto/bin/
-/React.Dto/obj/
+/React.WebApi/bin
+/React.WebApi/obj
+/React.DB/bin
+/React.DB/obj
+/React.Dto/bin
+/React.Dto/obj
