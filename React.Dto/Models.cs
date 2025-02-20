@@ -6,6 +6,13 @@ public class ProjectDto
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; }
     public IList<TicketDto> Tickets { get; set; } = [];
+    public IList<TagDto> Tags { get; set; } = [];
+}
+
+public class TagDto
+{
+    public long Id { get; set; }
+    public string Name { get; set; } = string.Empty;
 }
 
 public class TicketDto

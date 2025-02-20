@@ -1,9 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using React.DB;
-using React.DB.Entities;
 using React.DB.Reps;
 using React.DB.Reps.Interfaces;
 using React.Dto;
+using React.WebApi.Configs;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,10 +11,23 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") 
                        ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
+var corsConfig = builder.Configuration.GetSection("Cors").Get<Cors>()
+                 ?? throw new InvalidOperationException("Cors config not found.");
+
 // Add services to the container.
 builder.Services.AddDbContext<AppDbCtx>(options => options.UseSqlServer(connectionString));
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddCors(policy =>
+{
+    policy.AddPolicy(corsConfig.Name, options =>
+    {
+        options.WithOrigins(corsConfig.Allowed.Origins)
+            .WithHeaders(corsConfig.Allowed.Headers)
+            .WithMethods(corsConfig.Allowed.Methods);
+    });
+});
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
@@ -31,11 +44,13 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseCors(corsConfig.Name);
+
 app.UseHttpsRedirection();
 
 app.MapGet("/projects", async (IUnitOfWork unitOfWork) =>
     {
-        var data = await unitOfWork.RepProjects.Get(includes:"Tickets,Tickets.Status", asNoTracking:true)
+        var data = await unitOfWork.RepProjects.Get(includes:"Tags,Tickets,Tickets.Status", asNoTracking:true)
             .Select(o => new ProjectDto()
             {
                 Id = o.Id,
@@ -52,6 +67,19 @@ app.MapGet("/projects", async (IUnitOfWork unitOfWork) =>
         return new Result<IList<ProjectDto>>(data);
     })
     .WithName("Projects");
+
+app.MapGet("/tags", async (IUnitOfWork unitOfWork) =>
+    {
+        var data = await unitOfWork.RepTags.Get(asNoTracking:true)
+            .Select(o => new TagDto()
+            {
+                Id = o.Id,
+                Name = o.Name
+            })
+            .ToListAsync();
+        return new Result<IList<TagDto>>(data);
+    })
+    .WithName("Tags");
 
 app.MapGet("/tickets", async (IUnitOfWork unitOfWork) =>
     {
