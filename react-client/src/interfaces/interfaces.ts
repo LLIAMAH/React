@@ -1,8 +1,8 @@
 export interface IProject {
-    id: number;
+    id: number | null;
     name: string;
     description: string | null;
-    tickets: ITicket[]
+    tickets: ITicket[] | [],
     tags: ITag[] | null;
 }
 

@@ -33,7 +33,8 @@ export const PROJECTS: IProject[] = [
                     name: 'Pending'
                 }
             }
-        ]
+        ],
+        tags: []
     },
     {
         id: 2,
@@ -67,7 +68,8 @@ export const PROJECTS: IProject[] = [
                     name: 'Pending'
                 }
             }
-        ]
+        ],
+        tags: []
     },
     {
         id: 3,
@@ -101,6 +103,7 @@ export const PROJECTS: IProject[] = [
                     name: 'Pending'
                 }
             }
-        ]
+        ],
+        tags: []
     }
 ];
