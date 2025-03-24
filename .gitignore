@@ -1,6 +1,15 @@
 ﻿.idea/*
+.idea/
 
 /React.WebApi/bin/
 /React.WebApi/obj/
 /React.DB/bin/
 /React.DB/obj/
+/.vs/
+/React.Dto/bin/
+/react-client/node_modules/
+/React.Dto/obj
+/React.MongoDB/bin/
+/React.MongoDB/obj/
+
+*.user
