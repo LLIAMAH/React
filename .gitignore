@@ -44,11 +44,11 @@ coverage/
 *.swp
 
 ### Custom Entries From Your Project ###
-React.WebApi/bin
-React.WebApi/obj
-React.DB/bin
-React.DB/obj
-React.Dto/bin
-React.Dto/obj
-React.Dto/obj/Debug/net9.0/
-React.Dto/obj/Debug/net9.0/*.cache
+/React.WebApi/bin
+/React.WebApi/obj
+/React.DB/bin
+/React.DB/obj
+/React.Dto/bin
+/React.Dto/obj
+/React.Dto/obj/Debug/net9.0/
+/React.Dto/obj/Debug/net9.0/*.cache
