@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using React.DB;
 
@@ -10,9 +11,11 @@ using React.DB;
 namespace React.DB.Migrations
 {
     [DbContext(typeof(AppDbCtx))]
-    partial class AppDbCtxModelSnapshot : ModelSnapshot
+    [Migration("20250218222117_AddTicketStatus")]
+    partial class AddTicketStatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -38,12 +41,7 @@ namespace React.DB.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
-                    b.Property<long?>("TagId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("TagId");
 
                     b.ToTable("Projects");
                 });
@@ -63,7 +61,7 @@ namespace React.DB.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Statuses");
+                    b.ToTable("Status");
 
                     b.HasData(
                         new
@@ -86,24 +84,6 @@ namespace React.DB.Migrations
                             Id = 4L,
                             Name = "Completed"
                         });
-                });
-
-            modelBuilder.Entity("React.DB.Entities.Tag", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(64)
-                        .HasColumnType("nvarchar(64)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("React.DB.Entities.Ticket", b =>
@@ -138,13 +118,6 @@ namespace React.DB.Migrations
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("React.DB.Entities.Project", b =>
-                {
-                    b.HasOne("React.DB.Entities.Tag", null)
-                        .WithMany("Projects")
-                        .HasForeignKey("TagId");
-                });
-
             modelBuilder.Entity("React.DB.Entities.Ticket", b =>
                 {
                     b.HasOne("React.DB.Entities.Project", "Project")
@@ -172,11 +145,6 @@ namespace React.DB.Migrations
             modelBuilder.Entity("React.DB.Entities.Status", b =>
                 {
                     b.Navigation("Tickets");
-                });
-
-            modelBuilder.Entity("React.DB.Entities.Tag", b =>
-                {
-                    b.Navigation("Projects");
                 });
 #pragma warning restore 612, 618
         }
