@@ -1,13 +1,9 @@
 import {IContextData, useProjects} from "../context/ProjectContext.tsx";
-import {IProject, ITag} from "../interfaces/interfaces.ts";
+import {IError, IProject, ITag} from "../interfaces/interfaces.ts";
 import {useRef, useState} from "react";
 import {ProjectNewModal} from "./ProjectNewModal.tsx";
 import {UniversalModal} from "./UniversalModal.tsx";
 import {Form} from "react-bootstrap";
-
-interface IError {
-    message: string;
-}
 
 export default function ProjectsPanel() {
   const {state, setState} = useProjects()!;
@@ -64,11 +60,6 @@ export default function ProjectsPanel() {
       isSelected: project.id === id,
     }));
 
-    console.log("State projects");
-    console.table(state.projects);
-    console.log("Projects new");
-    console.table(projects);
-
     setState({
       ...state,
       projects: projects,
@@ -109,7 +100,7 @@ export default function ProjectsPanel() {
         show={showModal}
         handleClose={() => setShowModal(false)}
         onConfirm={addProject}
-        title="Создать новый проект"
+        title="Create new project"
       />
     </>
   );

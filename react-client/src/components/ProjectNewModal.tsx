@@ -23,22 +23,22 @@ export const ProjectNewModal
           <Modal.Body>
               <Form>
                   <Form.Group>
-                      <Form.Label>Название проекта</Form.Label>
+                      <Form.Label>Projects name</Form.Label>
                       <Form.Control
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        placeholder="Введите название"
+                        placeholder="Enter name"
                       />
                   </Form.Group>
                   <Form.Group className="mt-3">
-                      <Form.Label>Теги</Form.Label>
+                      <Form.Label>Tags</Form.Label>
                       <CreatableSelect
                         isMulti
                         onChange={(newValue) =>
                           setFormData({...formData, tags: newValue as { label: string; value: string }[]})}
                         value={formData.tags}
-                        placeholder="Добавьте теги"
+                        placeholder="Add tags"
                       />
                   </Form.Group>
               </Form>
@@ -53,4 +53,4 @@ export const ProjectNewModal
           </Modal.Footer>
       </Modal>
     );
-});
+})

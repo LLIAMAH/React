@@ -17,9 +17,14 @@ export interface ITicket {
     title: string;
     description: string;
     status: IStatus;
+    isSelected: boolean;
 }
 
 export interface IStatus {
     id: number;
     name: string;
+}
+
+export interface IError {
+  message: string;
 }
