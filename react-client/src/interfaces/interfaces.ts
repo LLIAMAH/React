@@ -4,6 +4,7 @@ export interface IProject {
     description: string | null;
     tickets: ITicket[] | [],
     tags: ITag[] | null;
+    isSelected: boolean;
 }
 
 export interface ITag {

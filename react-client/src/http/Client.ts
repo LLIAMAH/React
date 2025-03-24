@@ -3,24 +3,23 @@ import {IResult} from "../interfaces/web-interfaces.ts";
 
 export const ROUTES = {
     PROJECTS: '/projects',
+    TICKETS: '/tickets',
     TAGS: '/tags'
 }
 
 export class Client {
     private BASE_URL = 'http://localhost:5241';
 
-    async get<T>(url: string): Promise<T | undefined> {
-        const response = await fetch(url)
-            .then(
-                resp => resp.json()
-            );
+    async get<T>(url: string): Promise<T> {
+        const response = await fetch(url);
+        const responseJson = await response.json();
         if (!response.ok) {
             throw new Error(response.statusText);
         }
-        return response as T;
+        return responseJson as T;
     }
 
-    async post<T>(url: string, data: object): Promise<T | undefined> {
+    async post<T>(url: string, data: object): Promise<T> {
         const response = await fetch(url, {
             method: 'POST',
             headers: {
@@ -38,7 +37,7 @@ export class Client {
         return response as T;
     }
 
-    async put<T>(url: string, data: object): Promise<T | undefined> {
+    async put<T>(url: string, data: object): Promise<T> {
         const response = await fetch(url, {
             method: 'put',
             headers: {
@@ -56,15 +55,15 @@ export class Client {
         return response as T;
     }
 
-    async getProjects(): Promise<IResult<IProject[]> | undefined> {
-        return await this.get<IResult<IProject[]>>(`${this.BASE_URL}/projects`);
+    async getProjects(): Promise<IResult<IProject[]>> {
+        return await this.get<IResult<IProject[]>>(`${this.BASE_URL}${ROUTES.PROJECTS}`);
     }
 
-    async postProject(project: IProject): Promise<IResult<IProject> | undefined> {
-        return await this.post<IResult<IProject>>(`${this.BASE_URL}/projects`, project);
+    async postProject(project: IProject): Promise<IResult<IProject>> {
+        return await this.post<IResult<IProject>>(`${this.BASE_URL}${ROUTES.PROJECTS}`, project);
     }
 
-    async getTags(): Promise<IResult<ITag[]> | undefined> {
-        return await this.get<IResult<ITag[]>>(`${this.BASE_URL}/tags`);
+    async getTags(): Promise<IResult<ITag[]>> {
+        return await this.get<IResult<ITag[]>>(`${this.BASE_URL}${ROUTES.TAGS}`);
     }
 }
